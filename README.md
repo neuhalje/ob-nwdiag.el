@@ -1,46 +1,40 @@
-ob-blockdiag.el
+ob-nwdiag.el
 ---------------
 
-An extension for org-babel to support [blockdiag](http://blockdiag.com/en/).
+An extension for org-babel to support [nwdiag](http://blockdiag.com/en/).
 
 ## Installation
 
-This package is availaple in [MELPA](https://melpa.org/).
-
-> [How to enable MELPA](https://melpa.org/#/getting-started).
-
-With "MELPA enabled emacs" you could install this package by typing this sequence:
-
-``` text
-M-x
-package-install
-ob-blockdiag
-⏎
-```
+Please install from the repo.
 
 Now you could enable this package in your Emacs config with:
 
 ``` emacs-lisp
 (org-babel-do-load-languages 'org-babel-load-languages
- '((blockdiag . t))
+ '((nwdiag . t))
 )
 ```
 
 ## Example
 
-> Blockdiag in Fedora installed from `python3-blockdiag` package
-> which has unusual executable name.
-> Output file name is `ololo.png`
 
 ``` org
-#+BEGIN_SRC blockdiag :tool blockdiag-3.5 :file ololo.png
-blockdiag {
-   A [label = "foo"];
-   B [label = "bar"];
-   C [label = "baz"];
-   A -> B [label = "click bar", textcolor="red"];
-   B -> C [label = "click baz"];
-   C -> A;
+#+BEGIN_SRC nwdiag :tool nwdiag-3.5 :file ololo.png
+nwdiag {
+  network dmz {
+      address = "210.x.x.x/24"
+
+      web01 [address = "210.x.x.1"];
+      web02 [address = "210.x.x.2"];
+  }
+  network internal {
+      address = "172.x.x.x/24";
+
+      web01 [address = "172.x.x.1"];
+      web02 [address = "172.x.x.2"];
+      db01;
+      db02;
+  }
 }
 #+END_SRC
 ```
@@ -49,7 +43,7 @@ blockdiag {
 
 There are some things you could customize:
 
-    - `:tool` if you have blockdiag in unusual location or want to use seqdiag or [others](http://blockdiag.com/en/#table-of-contents)
+    - `:tool` if you have nwdiag in unusual location or want to use seqdiag or [others](http://blockdiag.com/en/#table-of-contents)
     - `:transparency t` to make transparent background of diagram (PNG only)
     - `:antialias t` pass diagram image to anti-alias filter
     - `:font` if you want the `:tool` to use provided font
@@ -58,6 +52,6 @@ There are some things you could customize:
 
 ## Errors and output
 
-It recreates a buffer with name `*ob-blockdiag*` every time you evaluating something.
+It recreates a buffer with name `*ob-nwdiag*` every time you evaluating something.
 
 There will be errors and output.
